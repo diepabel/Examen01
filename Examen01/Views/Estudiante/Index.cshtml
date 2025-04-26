@@ -1,0 +1,51 @@
+﻿@model List<Estudiante>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-6">
+            <h2 class="text-primary">Lista de Estudiantes</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Estudiante" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Crear nuevo estudiante
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Carrera</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var estudiante in Model)
+            {
+                <tr>
+                    <td>@estudiante.Nombre</td>
+                    <td>@estudiante.Apellido</td>
+                    <td>@estudiante.Carrera?.Nombre</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a asp-controller="Estudiante" asp-action="Edit" asp-route-id="@estudiante.EstudianteId" class="btn btn-primary">
+                                <i class="bi bi-pencil"></i> Editar
+                            </a>
+                            <a asp-controller="Estudiante" asp-action="Delete" asp-route-id="@estudiante.EstudianteId" class="btn btn-danger">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
